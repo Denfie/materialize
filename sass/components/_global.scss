@@ -27,9 +27,6 @@ ul {
 a {
 	color: $link-color;
 	text-decoration: none;
-
-  // Gets rid of tap active state
-  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -59,7 +56,9 @@ ul {
 
 
 // Z-levels
-
+.z-depth-0{
+    @include box-shadow(none);
+}
 .z-depth-1{
     @include box-shadow-2(0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12));
 }
@@ -318,6 +317,10 @@ td, th{
   text-align: left;
   vertical-align: middle;
   border-radius: 2px;
+}
+
+tr.pointer {
+	cursor: pointer;
 }
 
 // Responsive Table
