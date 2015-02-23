@@ -1,0 +1,5 @@
+// calc font-size
+@mixin font-size($number, $type: rem) {
+    font-size: dp($number, 1, px);
+    font-size: dp($number, 1, $type);
+}
