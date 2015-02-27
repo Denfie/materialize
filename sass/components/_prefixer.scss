@@ -117,16 +117,23 @@
 
 // Keyframes
 @mixin keyframes($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
+  @-webkit-keyframes $animation-name {
     @content;
   }
-  @-moz-keyframes #{$animation-name} {
+  @-moz-keyframes $animation-name {
     @content;
   }
-  @keyframes #{$animation-name} {
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
     @content;
   }
 }
+
 
 // Backface-visibility
 
@@ -324,7 +331,6 @@
     opacity: $factor;
 }
 
-
 // Text Shadow
 
 @mixin text-shadow($args) {
@@ -334,7 +340,7 @@
 
 // Transforms
 
-@mixin transform($args) {
+@mixin transform($args...) {
     -webkit-transform: $args;
     -moz-transform: $args;
     -ms-transform: $args;
@@ -379,7 +385,7 @@
 
 // Transitions
 
-@mixin transition($args:200ms) {
+@mixin transition($args...) {
     -webkit-transition: $args;
     -moz-transition: $args;
     -o-transition: $args;
@@ -414,15 +420,95 @@
     -ms-transition-timing-function: $function;
     transition-timing-function: $function;
 }
+
 @mixin margin($top, $right, $bottom, $left){
 	margin-top: dp($top, 1, px);
 	margin-right: dp($right, 1, px);
 	margin-bottom: dp($bottom, 1, px);
 	margin-left: dp($left, 1, px);
 }
+@mixin margin-em($top, $right, $bottom, $left){
+	margin-top: dp($top, 1, em);
+	margin-right: dp($right, 1, em);
+	margin-bottom: dp($bottom, 1, em);
+	margin-left: dp($left, 1, em);
+}
+@mixin margin-rem($top, $right, $bottom, $left){
+	margin-top: dp($top, 1, rem);
+	margin-right: dp($right, 1, rem);
+	margin-bottom: dp($bottom, 1, rem);
+	margin-left: dp($left, 1, rem);
+}
 @mixin padding($top, $right, $bottom, $left){
 	padding-top: dp($top, 1, px);
 	padding-right: dp($right, 1, px);
 	padding-bottom: dp($bottom, 1, px);
 	padding-left: dp($left, 1, px);
+}
+
+/*
+	Images
+*/
+$image-path: '../img' !default;
+$fallback-extension: 'png' !default;
+$retina-suffix: '@2x';
+@mixin background-image($name, $size:false, $img-path:false){
+	
+    @if($img-path){
+    	background-image: url(#{$img-path}/#{$name}.svg);
+    }
+    @else {
+	    background-image: url(#{$image-path}/#{$name}.svg);
+    }
+    
+    @if($size){
+        background-size: $size;
+    }
+    
+    .no-svg &{
+	    
+	    @if($img-path){
+	    	background-image: url(#{$img-path}/#{$name}.#{$fallback-extension});
+	    }
+	    @else {
+		    background-image: url(#{$image-path}/#{$name}.#{$fallback-extension});
+	    }
+
+        @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+		    @if($img-path){
+		    	background-image: url(#{$img-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+		    }
+		    @else {
+			    background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+		    }
+        }
+    }
+}
+
+/*
+	clearfix
+*/
+%clearfix {
+	*zoom: 1;
+	&:before, &:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+/*
+	visual hidden
+*/
+%visuallyhidden {
+	margin: -1px;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	clip: rect(0, 0, 0, 0);
+	position: absolute;
 }

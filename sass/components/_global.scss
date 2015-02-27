@@ -29,6 +29,10 @@ a {
 	text-decoration: none;
 }
 
+a:visited:before {
+   content:  "\2713 ";
+}
+
 
 // Positioning
 .valign-wrapper {

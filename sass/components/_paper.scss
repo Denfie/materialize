@@ -1,0 +1,58 @@
+$transaction-paper: linear;
+$transaction-timing: 0.3s;
+
+.paper {
+	.card {
+		//@include box-shadow-2(0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12));
+		
+		@include border-radius(2px 2px 0px 0px);
+		@include box-shadow-2(0 3px 4px 0 rgba(0,0,0,0.16),0 9px 10px 0 rgba(0,0,0,0.15));
+    	@include transition(
+    		margin-top 		$transaction-timing $transaction-paper 0s, 
+    		margin-bottom 	$transaction-timing $transaction-paper 0s, 
+    		width 			$transaction-timing $transaction-paper 0s, 
+    		height 			$transaction-timing $transaction-paper 0s, 
+    		left			$transaction-timing $transaction-paper 0s
+    	);
+    	
+		left: 0px;
+		
+		& + .card {
+			@include border-radius(0px);
+			margin: 0;
+		}
+		
+		&:first-child {
+			@extend .z-depth-1;
+			margin-top: $element-top-margin;
+			margin-bottom: 0;
+		}
+		
+		&:last-child {
+			margin-bottom: $element-bottom-margin;
+			
+			&:after {
+				content: " ";
+			}
+			
+			&.active {
+				&:after {
+					content: " ";
+				}
+			}
+		}
+		
+		&.active {
+			@extend .z-depth-2;
+			@include margin(10, 0, 10, 0);
+			
+			& + .card {
+				//@include box-shadow-2(0 3px 4px 0 rgba(0,0,0,0.16),0 9px 10px 0 rgba(0,0,0,0.15));
+			}
+		}
+		
+	}
+	.card-last {
+		@include border-radius(0px 0px 2px 2px);
+	}
+}
