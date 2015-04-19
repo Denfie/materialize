@@ -1,0 +1,30 @@
+// define selection
+@mixin selection {
+	::-webkit-selection { @content; }
+    ::-moz-selection { @content; }
+    ::selection { @content; }
+}
+
+p {
+	// use it
+	@include selection {
+	    color: black;
+	    background: #b9b9b9;
+	}
+}
+
+a {
+	// use it
+	@include selection {
+	    color: white;
+	    background: blue;
+	}
+}
+
+i {
+	// use it
+	@include selection {
+	    color: black;
+	    background: #ffb700;
+	}
+}

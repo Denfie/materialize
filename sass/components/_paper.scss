@@ -15,6 +15,7 @@ $transaction-timing: 0.3s;
     		left			$transaction-timing $transaction-paper 0s
     	);
     	
+    	z-index: 100;
 		left: 0px;
 		
 		& + .card {
@@ -45,6 +46,8 @@ $transaction-timing: 0.3s;
 		&.active {
 			@extend .z-depth-2;
 			@include margin(10, 0, 10, 0);
+			
+			z-index: 1000;
 			
 			& + .card {
 				//@include box-shadow-2(0 3px 4px 0 rgba(0,0,0,0.16),0 9px 10px 0 rgba(0,0,0,0.15));
